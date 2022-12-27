@@ -18,15 +18,16 @@ app.get('/test', (req, res) => {
     let time = new Date();
     res.status(200).send({ status: 200 , message : `${time.getHours()}:${time.getMinutes()}`})
   })
-  app.get('/hello/:id', (req, res) => {
-    let id = req.params
-    let ID = {
-      status:200,
-      message:`hello,${id}`,
-      }
-    res.send(ID)
-  })
 
+  app.get('/hello/:id', (req, res) => {
+  let id = req.params.id  
+    res.status(200).send({status:200 , message:"hello",id})
+  })
+  app.get('/searchs?/:search' , (req ,res)=> {
+    let data= req.params.search;
+
+    res.send({status:200, message:"ok", data:data});
+  })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
