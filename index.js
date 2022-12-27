@@ -45,48 +45,6 @@ app.get("/movies/read", (req, res) => {
   let data = `${movies[0].title} <dt> ${movies[1].title} <dt>${movies[2].title}<dt>${movies[3].title}`;
   res.status(200).send(data);
 });
-
-//   app.get('/movies/read/:date', (req, res) => {
-//   let daTe= req.params.date
-
-//   if(daTe == 1975){
-//     res.status(200).send(`${movies[0].title} ----> ${movies[0].year}`)
-//   }
-//   else if(daTe == 1992){
-//     res.status(200).send(`${movies[3].title} ----> ${movies[3].year}`)
-//   }
-//   else if(daTe == 1985){
-//     res.status(200).send(`${movies[2].title} ----> ${movies[2].year}`)
-//   }
-//   else if(daTe == 2009){
-//     res.status(200).send(`${movies[1].title} ----> ${movies[1].year}`)
-//   }
-
-//   else{
-//     res.send(`<h1> this movie in ${daTe} is not found ` )
-//   }
-
-// })
-//   app.get('/movies/read//:rating', (req, res) => {
-//     let Rating= req.params.rating
-
-//     if(Rating == 8){
-//       res.status(200).send(`${movies[0].title} ----> ${movies[0].rating}`)
-//     }
-//     else if(Rating == 8){
-//       res.status(200).send(`${movies[2].title} ----> ${movies[2].rating}`)
-//     }
-//     else if(Rating == 7.8){
-//       res.status(200).send(`${movies[1].title} ----> ${movies[1].rating}`)
-//     }
-
-//     else if(Rating == 6.2){
-//       res.status(200).send(`${movies[3].title} ----> ${movies[3].rating}`)
-//     }
-//     else{
-//       res.send(`<h1> this movie in ${Rating}rate is not found ` )
-//     }
-//     })
 app.get("/movies/read/:text", (req, res) => {
   if (req.params.text === "by-date") {
     res
@@ -111,6 +69,26 @@ app.get("/movies/read/:text", (req, res) => {
     });
   }
 });
+
+app.get("/movies/read/id/:id", (req, res) => {
+  let Id = req.params.id;
+  if (Id == "jaws"){
+    res.status(200).send(movies[0]);
+  }
+  else if (Id == "Avatar"){
+    res.status(200).send(movies[1])
+  }
+  else if (Id == "Brazil"){
+    res.status(200).send(movies[2])
+  }
+  else if (Id == "الإرهاب والكباب"){
+    res.status(200).send(movies[3])
+  }
+  else{
+    res.status(404).send(`the movie ${Id} does not exist`)
+  }
+});
+
 
 app.get("/movies/update", (req, res) => {
   res.send("Hello World!");
