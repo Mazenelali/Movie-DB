@@ -29,6 +29,39 @@ app.get('/test', (req, res) => {
     res.send({status:200, message:"ok", data:data});
   })
 
+  const movies = [
+    { title: 'Jaws', year: 1975, rating: 8 },
+    { title: 'Avatar', year: 2009, rating: 7.8 },
+    { title: 'Brazil', year: 1985, rating: 8 },
+    { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 }
+]
+
+  app.get('/movies/create', (req, res) => {
+    res.send("")
+  })
+
+  app.get('/movies/read', (req, res) => {
+    
+    let data = `${movies[0].title} , ${movies[1].title} ,${movies[2].title},${movies[3].title}`
+    res.status(200).send(data)
+  })
+
+  app.get('/movies/update', (req, res) => {
+    res.send('Hello World!')
+  })
+
+  app.get('/movies/delete', (req, res) => {
+    res.send('Hello World!')
+  })
+
+
+
+
+
+
+
+
+  
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
