@@ -12,15 +12,19 @@ app.get('/test', (req, res) => {
     status : 200,
     message:"ok",
   }
-    res.send(test)
+    res.status(200).send(test)
   })
   app.get('/time', (req, res) => {
-    TIME=req.query.time
-    let time = {
+    let time = new Date();
+    res.status(200).send({ status: 200 , message : `${time.getHours()}:${time.getMinutes()}`})
+  })
+  app.get('/hello/:id', (req, res) => {
+    let id = req.params
+    let ID = {
       status:200,
-      message:TIME,
+      message:`hello,${id}`,
       }
-    res.send(time)
+    res.send(ID)
   })
 
 
