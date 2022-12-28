@@ -34,15 +34,11 @@ const movies = [
   { title: "Jaws", year: 1975, rating: 8 },
   { title: "Avatar", year: 2009, rating: 7.8 },
   { title: "Brazil", year: 1985, rating: 8 },
-  { title: "الإرهاب والكباب‎", year: 1992, rating: 6.2 },
+  { title: "الإرهاب والكباب", year: 1992, rating: 6.2 },
 ];
 
-app.get("/movies/create", (req, res) => {
-  res.send("");
-});
-
 app.get("/movies/read", (req, res) => {
-  let data = `${movies[0].title} <dt> ${movies[1].title} <dt>${movies[2].title}<dt>${movies[3].title}`;
+  let data = movies;
   res.status(200).send(data);
 });
 app.get("/movies/read/:text", (req, res) => {
@@ -72,26 +68,37 @@ app.get("/movies/read/:text", (req, res) => {
 
 app.get("/movies/read/id/:id", (req, res) => {
   let Id = req.params.id;
-  if (Id == "jaws"){
+  if (Id == "jaws") {
     res.status(200).send(movies[0]);
-  }
-  else if (Id == "Avatar"){
-    res.status(200).send(movies[1])
-  }
-  else if (Id == "Brazil"){
-    res.status(200).send(movies[2])
-  }
-  else if (Id == "الإرهاب والكباب"){
-    res.status(200).send(movies[3])
-  }
-  else{
-    res.status(404).send(`the movie ${Id} does not exist`)
+  } else if (Id == "Avatar") {
+    res.status(200).send(movies[1]);
+  } else if (Id == "Brazil") {
+    res.status(200).send(movies[2]);
+  } else if (Id == "الإرهاب والكباب") {
+    res.status(200).send(movies[3]);
+  } else {
+    res.status(404).send(`the movie ${Id} does not exist`);
   }
 });
 
+app.get("/movies/addtitle/:title/year/:year/rating/:rating", (req, res) => {
+  let title = req.params.title;
+  let year = req.params.year;
+  let rating = req.params.rating;
 
+  let all = { title: title, year: year, rating: rating };
+  if( typeof title == "string" && year > 1000 && rating >= 0 && rating <= 10){
+  movies.push(all);
+  res.send(movies);
+  }
+  else if (typeof year != "number"){
+    res.send({message:'you cannot create a movie without providing a title and a year'}).sendStatus(403)
+  }
+});
+
+// console.log(movies)
 app.get("/movies/update", (req, res) => {
-  res.send("Hello World!");
+  res.send();
 });
 
 app.get("/movies/delete", (req, res) => {
