@@ -97,9 +97,6 @@ app.get("/movies/addtitle/:title/year/:year/rating/:rating", (req, res) => {
   }
 });
 
-app.get("/movies/update", (req, res) => {
-  res.send();
-});
 
 app.get("/movies/delete/:delete", (req, res) => {
   let Delete = req.params.delete
@@ -114,6 +111,18 @@ app.get("/movies/delete/:delete", (req, res) => {
 }
 );
 
+
+app.get("/movies/update/:id/title/:newtitle/rating/:newrating", (req, res) => {
+  let id =req.params.id
+  let New = req.params.newtitle
+  let rate = req.params.newrating
+  movies[id].title=New
+  movies[id].rating = rate
+  res.send(movies);
+});
+
+// movies[0].title="ahmad"
+// console.log(movies)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
