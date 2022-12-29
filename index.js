@@ -37,6 +37,7 @@ const movies = [
   { title: "الإرهاب والكباب", year: 1992, rating: 6.2 },
 ];
 
+
 app.get("/movies/read", (req, res) => {
   let data = movies;
   res.status(200).send(data);
@@ -96,14 +97,23 @@ app.get("/movies/addtitle/:title/year/:year/rating/:rating", (req, res) => {
   }
 });
 
-// console.log(movies)
 app.get("/movies/update", (req, res) => {
   res.send();
 });
 
-app.get("/movies/delete", (req, res) => {
-  res.send("Hello World!");
-});
+app.get("/movies/delete/:delete", (req, res) => {
+  let Delete = req.params.delete
+  let index = movies.indexOf(movies[Delete]);
+  if (Delete >= 0 && Delete < movies.length){
+    movies.splice(index , 1)
+    res.send(movies)
+  }
+  else{
+    res.status(404).send({status:404, error:true, message:`the movie ${Delete} does not exist`})
+  }
+}
+);
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
