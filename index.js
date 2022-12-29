@@ -82,7 +82,7 @@ app.get("/movies/read/id/:id", (req, res) => {
   }
 });
 
-app.get("/movies/addtitle/:title/year/:year/rating/:rating", (req, res) => {
+app.post("/movies/addtitle/:title/year/:year/rating/:rating", (req, res) => {
   let title = req.params.title;
   let year = req.params.year;
   let rating = req.params.rating;
@@ -98,7 +98,7 @@ app.get("/movies/addtitle/:title/year/:year/rating/:rating", (req, res) => {
 });
 
 
-app.get("/movies/delete/:delete", (req, res) => {
+app.delete("/movies/delete/:delete", (req, res) => {
   let Delete = req.params.delete
   let index = movies.indexOf(movies[Delete]);
   if (Delete >= 0 && Delete < movies.length){
@@ -110,9 +110,7 @@ app.get("/movies/delete/:delete", (req, res) => {
   }
 }
 );
-
-
-app.get("/movies/update/:id/title/:newtitle/rating/:newrating", (req, res) => {
+app.put("/movies/update/:id/title/:newtitle/rating/:newrating", (req, res) => {
   let id =req.params.id
   let New = req.params.newtitle
   let rate = req.params.newrating
@@ -120,9 +118,6 @@ app.get("/movies/update/:id/title/:newtitle/rating/:newrating", (req, res) => {
   movies[id].rating = rate
   res.send(movies);
 });
-
-// movies[0].title="ahmad"
-// console.log(movies)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
