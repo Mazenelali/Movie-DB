@@ -1,11 +1,18 @@
-const { text } = require("express");
+
 const express = require("express");
+const { Db } = require("mongodb");
 const app = express();
-const port = 3000;
+const port = 5000;
+
+
+
+// step 3
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+// step 4
 
 app.get("/test", (req, res) => {
   let test = {
@@ -20,6 +27,8 @@ app.get("/time", (req, res) => {
     .status(200)
     .send({ status: 200, message: `${time.getHours()}:${time.getMinutes()}` });
 });
+
+//step 5
 
 app.get("/hello/:id", (req, res) => {
   let id = req.params.id;
@@ -37,6 +46,7 @@ const movies = [
   { title: "الإرهاب والكباب", year: 1992, rating: 6.2 },
 ];
 
+// step 6
 
 app.get("/movies/read", (req, res) => {
   let data = movies;
@@ -67,6 +77,8 @@ app.get("/movies/read/:text", (req, res) => {
   }
 });
 
+//step 7
+
 app.get("/movies/read/id/:id", (req, res) => {
   let Id = req.params.id;
   if (Id == "jaws") {
@@ -81,6 +93,9 @@ app.get("/movies/read/id/:id", (req, res) => {
     res.status(404).send(`the movie ${Id} does not exist`);
   }
 });
+
+//step 8
+
 
 app.post("/movies/addtitle/:title/year/:year/rating/:rating", (req, res) => {
   let title = req.params.title;
@@ -97,6 +112,7 @@ app.post("/movies/addtitle/:title/year/:year/rating/:rating", (req, res) => {
   }
 });
 
+//step 9
 
 app.delete("/movies/delete/:delete", (req, res) => {
   let Delete = req.params.delete
@@ -110,6 +126,10 @@ app.delete("/movies/delete/:delete", (req, res) => {
   }
 }
 );
+
+//step 10
+
+
 app.put("/movies/update/:id/title/:newtitle/rating/:newrating", (req, res) => {
   let id =req.params.id
   let New = req.params.newtitle
@@ -118,6 +138,12 @@ app.put("/movies/update/:id/title/:newtitle/rating/:newrating", (req, res) => {
   movies[id].rating = rate
   res.send(movies);
 });
+
+
+// app.get("/movies/:id", (req, res) => {
+//   res.send(req.query);
+// });
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
